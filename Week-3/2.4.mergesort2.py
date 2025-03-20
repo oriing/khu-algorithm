@@ -3,7 +3,18 @@ from typing import List
 def merge2(low: int, mid: int, high: int, S: List[int]) -> None:
     U = [0] * (high - low + 1)
     i, j, k = low, mid + 1, 0
-    # Complete the code here
+    
+    while k <= (high - low):
+        if (j > high) or (i <= mid and S[i] < S[j]):
+            U[k] = S[i]
+            i   += 1
+        else:
+            U[k] = S[j]
+            j   += 1
+        k += 1
+    
+    for k in range(high - low + 1):
+        S[k+low] = U[k]
 
 def mergesort2(low: int, high: int, S: List[int]) -> None:
     if low < high:
