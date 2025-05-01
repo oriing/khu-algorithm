@@ -4,9 +4,9 @@ from typing import List, Tuple, Optional
 class Node:
     def __init__(self, symbol: Optional[str], freq: int) -> None:
         self.symbol: Optional[str] = symbol
-        self.freq: int = freq
-        self.left: Optional['Node'] = None
-        self.right: Optional['Node'] = None
+        self.freq:   int = freq
+        self.left:   Optional['Node'] = None
+        self.right:  Optional['Node'] = None
         
     def preorder(self, path: List[Tuple[Optional[str], int]]) -> None:
         path.append((self.symbol, self.freq))
@@ -27,6 +27,14 @@ def huffman(n: int, s: List[str], f: List[int]) -> Node:
     for i in range(n):
         heappush(heap, (f[i], Node(s[i], f[i])))
 
-    # Complete the code here
+    for i in range(n-1):
+        a: Node = heappop(heap)[1]
+        b: Node = heappop(heap)[1]
+        data    = Node('+', a.freq + b.freq)
+        
+        data.left  = a
+        data.right = b
+
+        heappush(heap, (data.freq, data))
 
     return heappop(heap)[1]
