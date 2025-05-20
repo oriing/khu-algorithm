@@ -8,11 +8,7 @@ count: int = 0              # Solution counter
 
 def promising(i: int) -> bool:
     global W, vcolor
-    
-    for idx in range(i):
-        if W[i][idx]:
-            if vcolor[i] == vcolor[idx]:
-                return False
+    # Complete the code here
 
     return True
 
@@ -21,9 +17,6 @@ def mcoloring(i: int, m: int) -> None:
     if promising(i):
         if i == n:
             print(vcolor[1:])
-            count += 1
+            # Complete the code here
         else:
-            for now_color in range(1, m+1):
-                vcolor[i+1] = now_color
-                mcoloring(i+1, m)
-                vcolor[i+1] = 0
+            # Complete the code here

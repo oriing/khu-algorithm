@@ -41,7 +41,6 @@ def run_test_cases(file_path="5.7.knapsack.0-1.bt.py"):
         result = ks_module.maxprofit
         expected = case["expected"]
         print(f"Max profit: {result}")
-        print(f"Max Set: {ks_module.bestset}")
 
         if abs(result - expected) < 1e-6:
             print("출력: ✅ Passed")
