@@ -7,18 +7,49 @@ class Node:
 
         
 def get_digit(key: int, digit_pos: int) -> int:
-    # Complete the code here
-    raise NotImplementedError()
-
+    stkey = str(key)
+    if len(stkey) < digit_pos:
+        return 0
+    return int(stkey[-digit_pos])
 
 def distribute(masterlist: Optional[Node], digit_pos: int) -> List[Optional[Node]]:
-    # Complete the code here
-    raise NotImplementedError()
+    buckets = [None] * 10
+    tails   = [None] * 10
 
+    while masterlist:
+        digit           = get_digit(masterlist.key, digit_pos)
+        next_node       = masterlist.link
+        masterlist.link = None
+
+        if buckets[digit] is None:
+            buckets[digit] = masterlist
+            tails[digit]   = masterlist
+        else:
+            tails[digit].link = masterlist
+            tails[digit]      = masterlist
+
+        masterlist = next_node
+
+    return buckets
 
 def coalesce(list_array: List[Optional[Node]]) -> Optional[Node]:
-    # Complete the code here
-    raise NotImplementedError()
+    head = None
+    tail = None
+
+    for bucket in list_array:
+        if bucket == None:
+            continue
+
+        if head == None:
+            head = bucket
+            tail = bucket
+        else:
+            tail.link = bucket
+            
+        while tail.link:
+            tail = tail.link
+
+    return head
 
 
 def radixsort(masterlist: Optional[Node], numdigits: int) -> Optional[Node]:
